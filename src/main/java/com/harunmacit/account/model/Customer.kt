@@ -10,12 +10,13 @@ data class Customer(
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     val id: String?,
+
     val name: String?,
     val surname: String?,
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-    val accounts: Set<Account>?
-){
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
+    val accounts: Set<Account>
+) {
 
     constructor(name: String, surname: String) : this("", name, surname, HashSet())
 
